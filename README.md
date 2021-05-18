@@ -22,3 +22,13 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+yarn add router
+
+yarn add vuex
+
+yarn add sass
+
+yarn add sass-loader
