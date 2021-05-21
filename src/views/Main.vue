@@ -27,8 +27,12 @@ export default {
   },
   mounted() {
     if(this.$route.query.idx == undefined) return
-    this.main = true
+    
     this.$store.commit("setIdx", this.$route.query.idx)
+    this.$store.dispatch('getQuestion').then(response => {
+        console.log(response.length)
+        this.main = true
+    }).catch(() => {});
   },
   methods: {
 

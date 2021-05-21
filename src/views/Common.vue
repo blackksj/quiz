@@ -9,6 +9,9 @@
        <Information class="box"
               v-if="information"  />
        </transition>
+       <Question />
+       <QuestionRight/>
+       <QuestionWrong/>
     </div>
   </div>
 </template>
@@ -16,12 +19,18 @@
 <script>
 import Opening from '@/components/Opening'
 import Information from '@/components/Information'
+import Question from '@/components/Question'
+import QuestionRight from '@/components/QuestionRight'
+import QuestionWrong from '@/components/QuestionWrong'
 
 export default {
   name: 'Common',
   components: {
     Opening,
-    Information
+    Information,
+    Question,
+    QuestionRight,
+    QuestionWrong
   },
   data() {
     return {
@@ -32,6 +41,8 @@ export default {
   mounted() {
     //this.opening = true;
     this.information = true;
+
+    console.log(this.$store.state.question)
   }
 }
 </script>

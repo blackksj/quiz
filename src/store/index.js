@@ -5,10 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    rest_url: "www.emds.co.kr/",
+    rest_url: "http://www.emds.co.kr/rest",
     idx: 0,
     cate: {},
-    question: {}
+    question: [],
+    
   },
   mutations: {
     setIdx(state, idx)  {
@@ -16,7 +17,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getQuestion(context) {
+      let REST_URL = context.state.rest_url;
+      REST_URL += '/question.php?idx='+context.state.idx;
 
+      return fetch(REST_URL)
+          .then(response => response.json())
+          .then(response => {
+              if(response.question) {
+                context.state.question = response.question
+                  return response.question
+              } else {
+                  return response
+              }
+          });
+    }
   },
   modules: {
   }
