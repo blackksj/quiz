@@ -1,11 +1,13 @@
 <template>
   <div class="opening">
      <div class="content">
-        <img src="http://www.emds.co.kr/file/cate/S2FrYW9UYWxrXzIwMjEwNTE4XzIzNDkwNTA1MV8wMi5wbmc=_1621401009.png" alt="오프닝이미지" id="opening_image">
+        <img :src="image" alt="오프닝이미지" id="opening_image">
       </div>
       <div class="text-right">
-        <router-link v-bind:to="'Common'"><img src="http://www.emds.co.kr/file/cate/YnRuX3F1aXoucG5n_1621401718.png" alt=""></router-link>
+        <img class="click" :src="button_image" v-on:click="$emit('information')" alt="Yu Quiz?">
       </div>
+
+
   </div>
 </template>
 
@@ -13,6 +15,19 @@
 export default {
   name: 'Opening',
   props: {
+      cate: Object,
+  },
+  data() {
+    return {
+      url: '',
+      image: '',
+      button_image: ''
+    }
+  },
+  mounted() {
+    this.url = this.$store.state.url
+    this.image = this.url+'file/cate/'+this.cate.opening_image
+    this.button_image = this.url+'file/cate/'+this.cate.opening_button_image
   }
 }
 </script>

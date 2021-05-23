@@ -1,18 +1,7 @@
 <template>
-  <div class="questionRight">
+  <div class="questionPromote">
     <div class="content">
       <img :src="image" alt="이미지">
-    </div>
-    <div class="relative mt text-center">
-      <ItemView class="item"
-            ref="item"
-            v-for="(item, index) in arrItem" 
-            v-bind:index="index"
-            v-bind:item="item.item"
-            v-bind:correct_yn="item.correct_yn"
-            v-bind:selected_item="item.selected"
-            v-bind:color="'fff100'"
-            v-bind:key="item.item_idx"/>
     </div>
     <div class="relative mt">
       <img class="ab-right click" :src="count_image" v-on:click="fnNext" alt="카운트">
@@ -21,12 +10,9 @@
 </template>
 
 <script>
-import ItemView from '@/components/ItemView'
-
 export default {
-  name: 'QuestionRight',
+  name: 'QuestionPromote',
   components: {
-    ItemView
   },
   props: {
     question: Object
@@ -34,7 +20,6 @@ export default {
   data() {
     return {
       image: '',
-      arrItem: [],
       count: 5,
       count_image: '',
       goNext: false
@@ -42,11 +27,7 @@ export default {
   },
   mounted() {
     this.url = this.$store.state.url
-    this.image = this.url+'file/right/'+this.question.right_physical_name
-    for(let i=0; i<this.question.item.length; i++) {
-      this.question.item[i].selected = this.$store.state.lastedSelectedItem[i]
-    }
-    this.arrItem = this.question.item
+    this.image = this.url+'file/promote/'+this.question.promote_physical_name
 
     this.fnCount()
   },
@@ -54,7 +35,7 @@ export default {
     fnNext() {
       if(this.goNext) return
       
-      this.$emit('quizPromote')
+      this.$emit('quizNext')
 
       this.goNext = true
     },
@@ -74,7 +55,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.questionRight {
+.questionPromote {
   div.content {
     img {
         width: 100%;

@@ -1,13 +1,13 @@
 <template>
-  <div class="main" style="background-image:url('http://www.emds.co.kr/file/cate/S2FrYW9UYWxrXzIwMjEwNTE4XzIzMjYzMjUyNS5wbmc=_1621356778.png')">
+  <div class="main" v-bind:style="{backgroundImage:'url('+main_back_image+')'}">
     <div class="wrap">
       <transition name="slide-fade">
       <div v-if="main">
         <div class="center">
-          <img src="http://www.emds.co.kr/file/cate/bWFpbl9pbWFnZS5wbmc=_1621396283.png" alt="메인이미지" id="main_image">
+          <img :src="main_image" alt="메인이미지" id="main_image">
         </div>
         <div class="center">
-          <router-link v-bind:to="'Common'"><img src="http://www.emds.co.kr/file/cate/S2FrYW9UYWxrXzIwMjEwNTE4XzIzNDkxNjA1Ny5wbmc=_1621401009.png" alt=""></router-link>
+          <img class="click" :src="main_button_image" alt="버튼이미지" v-on:click="fnOpeningStart">
         </div>
       </div>
       </transition>
@@ -22,20 +22,37 @@ export default {
   },
   data() {
       return {
-        main: false
+        url: '',
+        main: false,
+        main_back_image: '',
+        main_image: '',
+        main_button_image: '',
       }
   },
   mounted() {
+    this.url = this.$store.state.url
+
     if(this.$route.query.idx == undefined) return
     
-    this.$store.commit("setIdx", this.$route.query.idx)
-    this.$store.dispatch('getQuestion').then(response => {
-        console.log(response.length)
+    this.$store.commit('setIdx', this.$route.query.idx)
+    this.$store.dispatch('getCate').then(response => {
+        let obj = response
+
+        this.main_back_image = this.url+'file/cate/'+obj.main_back_image
+        this.main_image = this.url+'file/cate/'+obj.main_image
+        this.main_button_image = this.url+'file/cate/'+obj.main_button_image
+
         this.main = true
+    }).catch(() => {});
+    this.$store.dispatch('getQuestion').then(response => {
+        this.$store.commit('setPoint', Math.round(100 / response.length).toString())
     }).catch(() => {});
   },
   methods: {
-
+    fnOpeningStart() {
+      this.main = false
+      setTimeout(() => {this.$router.push('/Common')}, 1000)
+    }
   }
 }
 </script>
@@ -63,7 +80,7 @@ export default {
 }
 @keyframes move-in {
     0% {
-        transform: translateY(-500px);
+        transform: translateY(-1000px);
     }
     100% {
         transform: translateY(0px);
