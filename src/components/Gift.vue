@@ -1,7 +1,7 @@
 <template>
   <div class="gift">
     <div class="content">
-      <img :src="image" alt="이미지">
+      <img :src="image" width="90%" alt="이미지">
     </div>
     <div class="relative mt text-center">
       <ItemGift class="item"
@@ -22,7 +22,7 @@
             :item="item[3]"/>            
     </div>
     <div class="relative mt">
-      <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" alt="NEXT">
+      <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" width="18%" alt="NEXT">
     </div>
   </div>
 </template>

@@ -1,10 +1,10 @@
 <template>
   <div class="questionPromote">
     <div class="content">
-      <img :src="image" alt="이미지">
+      <img :src="image" width="90%" alt="이미지">
     </div>
     <div class="relative mt">
-      <img class="ab-right click" :src="count_image" v-on:click="fnNext" alt="카운트">
+      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="18%" alt="카운트">
     </div>
   </div>
 </template>

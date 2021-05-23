@@ -35,7 +35,7 @@ export default {
 .opening {
     div.content {
         img {
-            width: 100%;
+            width: 90%;
         }
     }
 }
@@ -43,5 +43,9 @@ export default {
 .text-right {
     padding: 10px 55px;
     text-align: right;
+
+    img {
+      width: 20%
+    }
 }
 </style>

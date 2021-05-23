@@ -4,11 +4,11 @@
       <div class="rect"><img src="../assets/info-top.png"/></div>
         <div class="content_background">
             <ul>
-              <li><span>성명 :</span> <input type="text" name="name" v-model="name" autocomplete=”off” placeholder="성명을 입력하세요"></li>
-              <li><span>병원명 :</span> <input type="text" name="hospital_name" v-model="hospital_name" autocomplete=”off” placeholder="병원명을 입력하세요"></li>
-              <li><span>진료과 :</span> <input type="text" name="department" v-model="department" autocomplete=”off” placeholder="진료과를 입력하세요"></li>
-              <li><span>휴대폰번호 :</span> <input type="text" name="hpno" v-model="hpno" autocomplete=”off” placeholder="휴대폰번호를 입력하세요"></li>
-              <li><span>담당자 :</span> <input type="text" name="charge_name" v-model="charge_name" autocomplete=”off” placeholder="담당자를 입력하세요"></li>
+              <li><span>성명 :</span> <input type="text" name="name" v-model="name" autocomplete="off" placeholder="성명을 입력하세요"></li>
+              <li><span>병원명 :</span> <input type="text" name="hospital_name" v-model="hospital_name" autocomplete="off" placeholder="병원명을 입력하세요"></li>
+              <li><span>진료과 :</span> <input type="text" name="department" v-model="department" autocomplete="off" placeholder="진료과를 입력하세요"></li>
+              <li><span>휴대폰번호 :</span> <input type="text" name="hpno" v-model="hpno" autocomplete="off" placeholder="휴대폰번호를 입력하세요"></li>
+              <li><span>담당자 :</span> <input type="text" name="charge_name" v-model="charge_name" autocomplete="off" placeholder="담당자를 입력하세요"></li>
               <li class="li-agreement">
                 개인정보 수집 및 이용동의
                 <div class="agreement">
@@ -26,8 +26,8 @@
         </div>
     </div>
     <div class="relative mt">
-      <div class="ab-top"><img src="../assets/yuquiz.png" alt="Yu Quiz?"></div>
-      <img class="ab-right click" src="../assets/yes.png" v-on:click="fnYes" alt="YES">
+      <div class="ab-top"><img src="../assets/yuquiz.png" alt="Yu Quiz?" width="25%"></div>
+      <img class="ab-right click" src="../assets/yes.png" v-on:click="fnYes" width="20%" alt="YES">
     </div>
   </div>
 </template>
@@ -118,7 +118,7 @@ export default {
     ul {
       margin: 0; padding: 0;
       li {
-        line-height: 4rem;
+        line-height: 3rem;
         span {
           width: 8rem;
           display: inline-block;
@@ -127,7 +127,7 @@ export default {
         }
         input[type=text] {
           width: 40rem;
-          height: 2.4rem;
+          height: 2rem;
           vertical-align: middle;
           border: 0;
           background-color: #d6dce5;

@@ -1,7 +1,7 @@
 <template>
   <div class="questionObject">
     <div class="content">
-      <img :src="question_image" alt="문제이미지">
+      <img :src="question_image" width="90%" alt="문제이미지">
     </div>
     <div class="relative mt text-center">
       <Item class="item"
@@ -13,7 +13,7 @@
             v-bind:key="item.item_idx"/>
     </div>
     <div class="relative mt">
-      <img class="ab-right click" :src="count_image" v-on:click="fnNext" alt="카운트">
+      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="18%" alt="카운트">
     </div>
   </div>
 </template>

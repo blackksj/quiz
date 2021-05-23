@@ -61,11 +61,10 @@ export default {
   height: 100%;
   background-size: 100% 100%;
   .wrap {
-    padding: 50px;
+    padding: 10px;
     .center {
       #main_image {
-        max-width: 1000px;
-        width: 100%;
+        width: 60%;
       }
       text-align: center;
     }

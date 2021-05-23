@@ -1,7 +1,7 @@
 <template>
   <div class="close">
     <div class="content">
-      <img :src="image" alt="이미지">
+      <img :src="image" width="90%" alt="이미지">
     </div>
   </div>
 </template>

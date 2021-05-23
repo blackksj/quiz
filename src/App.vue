@@ -24,5 +24,5 @@ body {
 
 .click {cursor: pointer;}
 .relative {position: relative}
-.mt {margin-top: 2rem;}
+.mt {margin-top: 1rem;}
 </style>

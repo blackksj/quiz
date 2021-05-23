@@ -53,7 +53,10 @@
               :cate="cate"
               v-if="viewClose" />
        </transition>
+       <div class="yuyu"><img src="../assets/yuyu.png" alt="YES"></div>
     </div>
+
+    
 
     <base-alert-message :message="alertMessage" v-on:btnClose="alertMessage = ''"/>
     <base-loading-bar v-if="loadingbar" v-on:loadingBarClose="loadingbar=false" />
@@ -180,13 +183,15 @@ export default {
   height: 100%;
   background-size: 100% 100%;
   .wrap {
-    padding: 50px;
+    padding: 10px;
     text-align: center;
     
     .box {
       display: inline-block;
     }
   }
+
+  .yuyu {position: fixed; left: 2rem; bottom: 2rem;}
 }
 
 .slide-fade-enter-active {
