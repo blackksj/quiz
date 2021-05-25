@@ -56,6 +56,14 @@
        <div class="yuyu"><img src="../assets/yuyu.png" alt="YES"></div>
     </div>
 
+    <audio
+        style="display:none"
+        ref="player"
+        id="audio-player"
+    >
+        <source src="../assets/time.mp3" type="audio/mpeg" />
+    </audio>
+
     
 
     <base-alert-message :message="alertMessage" v-on:btnClose="alertMessage = ''"/>
@@ -133,6 +141,9 @@ export default {
       
       setTimeout(() => {
         this.viewQuestion = true     
+        var audio = document.getElementById("audio-player");
+        audio.play();
+        //audio.pause();
       }, 1000)
     },
     fnQuizResult(obj) {
@@ -142,7 +153,6 @@ export default {
 
       if(obj.correct_yn) this.$store.state.answer.score += 20
 
-      console.log(this.$store.state.answer.score)
 
       if(obj.correct_yn) setTimeout(() => {this.viewQuestionRight = true}, 1000)
       else setTimeout(() => {this.viewQuestionWrong = true}, 1000)
@@ -191,7 +201,7 @@ export default {
     }
   }
 
-  .yuyu {position: fixed; left: 2rem; bottom: 2rem;}
+  .yuyu {text-align: left; padding-left: 2rem;}
 }
 
 .slide-fade-enter-active {

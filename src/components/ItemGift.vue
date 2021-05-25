@@ -22,7 +22,6 @@ export default {
     }
   },
   mounted() {
-      console.log(this.index)
       this.num_image = require('../assets/'+(this.index+1)+'.png')
   },
   methods: {
@@ -31,11 +30,13 @@ export default {
       if(!this.selected) this.now_color = this.default_color
       else if(this.selected) this.now_color = this.selected_color
 
-      if(this.correct_yn == 'right') {
-        this.result = this.selected
-      } else if(this.correct_yn == 'wrong') {
-        this.result = !this.selected
-      }
+      if(this.selected) {this.$emit('select', {"index":this.index, "item":this.item})}
+    },
+    fnDeSelected() {
+      this.selected = false
+
+      if(!this.selected) this.now_color = this.default_color
+      else if(this.selected) this.now_color = this.selected_color
     }
   }
 }

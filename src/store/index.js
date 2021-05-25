@@ -19,16 +19,10 @@ export default new Vuex.Store({
       hpno: '',
       charge_name: '',
       present: '',
-      score: 0
+      score: 0,
+      reply: []
     },
-    reply: [
-      {
-        cate_idx: 0,
-        question_idx: 0,
-        selected_item: [],
-        selected_correct_yn: true
-      }
-    ],
+    reply: [],
     lastedSelectedItem: []
   },
   mutations: {
@@ -69,6 +63,22 @@ export default new Vuex.Store({
                     return response
                 }
             });
+    },
+    postAnswer(context, payload) {
+      let REST_URL = context.state.rest_url;
+      REST_URL += '/answer_insert.php';
+
+      return fetch(REST_URL, {
+        method: 'POST',
+        body: payload
+      })
+      .then(response => response.json())
+      .then(response => {
+          return response;
+      })
+      .catch(() => {
+          return [];
+      });
     }
   },
   modules: {

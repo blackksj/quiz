@@ -5,20 +5,24 @@
     </div>
     <div class="relative mt text-center">
       <ItemGift class="item"
-            ref="itemGift"
+            ref="itemGift0"
             :index="0"
+            v-on:select="fnSelect"
             :item="item[0]"/>
       <ItemGift class="item"
-            ref="itemGift"
+            ref="itemGift1"
             :index="1"
+            v-on:select="fnSelect"
             :item="item[1]"/>
       <ItemGift class="item"
-            ref="itemGift"
+            ref="itemGift2"
             :index="2"
+            v-on:select="fnSelect"
             :item="item[2]"/>
       <ItemGift class="item"
-            ref="itemGift"
+            ref="itemGift3"
             :index="3"
+            v-on:select="fnSelect"
             :item="item[3]"/>            
     </div>
     <div class="relative mt">
@@ -41,17 +45,38 @@ export default {
   data() {
     return {
       image: '',
-      item: ['던킨도너츠', '스타벅스', '베스킨라빈스', '투썸플레이스'],
+      item: [],
       goNext: false
     }
   },
   mounted() {
     this.url = this.$store.state.url
     this.image = this.url+'file/cate/'+this.cate.gift_image
+    this.item = this.$store.state.cate.gift_text.split('|')
   },
   methods: {
     fnNext() {
-      this.$emit('close')
+      this.$store.state.answer.reply = this.$store.state.reply
+      let strAnswer = JSON.stringify(this.$store.state.answer)
+
+      let formData = new FormData()
+      formData.append('answer', strAnswer)  
+
+      this.$store.dispatch('postAnswer', formData)
+                  .then(response => {
+                      this.$emit('close')
+                      return response
+                  })
+   
+
+    },
+    fnSelect(obj) {
+      if(obj.index != 0) {this.$refs.itemGift0.fnDeSelected()}
+      if(obj.index != 1) {this.$refs.itemGift1.fnDeSelected()}
+      if(obj.index != 2) {this.$refs.itemGift2.fnDeSelected()}
+      if(obj.index != 3) {this.$refs.itemGift3.fnDeSelected()}
+
+      this.$store.state.answer.present = obj.item
     }
   }
 }
