@@ -3,7 +3,7 @@
     <div class="content">
       <img :src="question_image" width="90%" alt="문제이미지">
     </div>
-    <div class="relative mt text-center">
+    <div class="relative mt text-center" v-if="question_type=='object'">
       <Item class="item"
             ref="item"
             v-for="(item, index) in arrItem" 
@@ -12,19 +12,30 @@
             v-bind:correct_yn="item.correct_yn"
             v-bind:key="item.item_idx"/>
     </div>
+    <div class="relative mt text-center" v-if="question_type=='ox'">
+      <ItemOx class="item"
+            ref="item"
+            v-for="(item, index) in arrItem" 
+            v-bind:index="index"
+            v-bind:item="item.item"
+            v-bind:correct_yn="item.correct_yn"
+            v-bind:key="item.item_idx"/>
+    </div>
     <div class="relative mt">
-      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="18%" alt="카운트">
+      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="15%" alt="카운트">
     </div>
   </div>
 </template>
 
 <script>
 import Item from '@/components/Item'
+import ItemOx from '@/components/ItemOx'
 
 export default {
   name: 'QuestionObject',
   components: {
-    Item
+    Item,
+    ItemOx
   },
   props: {
     question: Object
@@ -35,6 +46,7 @@ export default {
       arrItem: [],
       count: 5,
       count_image: '',
+      question_type: '',
       goNext: false
     }
   },
@@ -42,6 +54,8 @@ export default {
     this.url = this.$store.state.url
     this.question_image = this.url+'file/question/'+this.question.question_physical_name
     this.arrItem = this.question.item
+
+    this.question_type = this.question.question_type
 
     this.fnCount()
   },

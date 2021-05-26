@@ -15,7 +15,7 @@
             v-bind:key="item.item_idx"/>
     </div>
     <div class="relative mt">
-      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="18%" alt="카운트">
+      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="15%" alt="카운트">
     </div>
   </div>
 </template>
