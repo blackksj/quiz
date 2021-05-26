@@ -26,8 +26,8 @@
         </div>
     </div>
     <div class="relative mt">
-      <div class="ab-top"><img src="../assets/yuquiz.png" alt="Yu Quiz?" width="25%"></div>
-      <img class="ab-right click" src="../assets/yes.png" v-on:click="fnYes" width="20%" alt="YES">
+      <div class="ab-top"><img src="../assets/yuquiz.png" alt="Yu Quiz?" width="20%"></div>
+      <img class="ab-right click" src="../assets/yes.png" v-on:click="fnYes" width="15%" alt="YES">
     </div>
   </div>
 </template>
@@ -133,19 +133,19 @@ export default {
           background-color: #d6dce5;
           color: #2b292c;
           padding-left: 1rem;
-          font-size: 1.2rem;
+          font-size: 1rem;
           font-weight: bold;
           font-family: 'Nanum Gothic', sans-serif;
         }
         .agreement {
           margin-left: -1rem;
-          margin-top: 1rem;
-          padding: 0.8rem 5rem;
+          margin-top: 0.2rem;
+          padding: 0.6rem 5rem;
           background-color: #e7e7e8;
           color: #383739;
           text-align: center;
-          font-size: 1rem;
-          line-height: 1.4rem;
+          font-size: 0.8rem;
+          line-height: 1rem;
         }
         .agreement-check {
           font-size: 0.8rem;

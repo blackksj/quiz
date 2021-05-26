@@ -18,7 +18,7 @@ body {
 #app {
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1rem;
   height: 100%;
 }
 

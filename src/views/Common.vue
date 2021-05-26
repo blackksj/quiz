@@ -193,7 +193,7 @@ export default {
   height: 100%;
   background-size: 100% 100%;
   .wrap {
-    padding: 10px;
+    padding: 0;
     text-align: center;
     
     .box {
