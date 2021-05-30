@@ -1,7 +1,7 @@
 <template>
   <div class="information">
     <div class="content">
-      <div class="rect"><img src="../assets/info-top.png"/></div>
+      <div class="rect"><img src="http://www.emds.co.kr/img/info-top.png"/></div>
         <div class="content_background">
             <ul>
               <li><span>성명 :</span> <input type="text" name="name" v-model="name" autocomplete="off" placeholder="성명을 입력하세요"></li>
@@ -22,12 +22,12 @@
             </ul>
         </div>
         <div class="rect">
-          <img src="../assets/info-bottom.png"/>
+          <img src="http://www.emds.co.kr/img/info-bottom.png"/>
         </div>
     </div>
     <div class="relative mt">
-      <div class="ab-top"><img src="../assets/yuquiz.png" alt="Yu Quiz?" width="20%"></div>
-      <img class="ab-right click" src="../assets/yes.png" v-on:click="fnYes" width="15%" alt="YES">
+      <div class="ab-top"><img src="http://www.emds.co.kr/img/yuquiz.png" alt="Yu Quiz?" width="15%"></div>
+      <img class="ab-right click" src="http://www.emds.co.kr/img/yes.png" v-on:click="fnYes" width="10%" alt="YES">
     </div>
   </div>
 </template>
@@ -61,7 +61,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state.idx);
   },
   methods: {
     fnYes() {
@@ -118,7 +117,7 @@ export default {
     ul {
       margin: 0; padding: 0;
       li {
-        line-height: 3rem;
+        line-height: 2.5rem;
         span {
           width: 8rem;
           display: inline-block;
@@ -127,13 +126,13 @@ export default {
         }
         input[type=text] {
           width: 40rem;
-          height: 2rem;
+          height: 1.6rem;
           vertical-align: middle;
           border: 0;
           background-color: #d6dce5;
           color: #2b292c;
           padding-left: 1rem;
-          font-size: 1rem;
+          font-size: 0.9rem;
           font-weight: bold;
           font-family: 'Nanum Gothic', sans-serif;
         }

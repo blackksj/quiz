@@ -1,5 +1,5 @@
 <template>
-  <div class="common" v-bind:style="{backgroundImage:'url('+common_back_image+')'}">
+  <div class="common">
      <div class="wrap">
        <transition name="slide-fade">
        <Opening class="box"
@@ -53,18 +53,17 @@
               :cate="cate"
               v-if="viewClose" />
        </transition>
-       <div class="yuyu"><img src="../assets/yuyu.png" alt="YES"></div>
+       <div class="yuyu"><img src="http://www.emds.co.kr/img/yuyu.png" alt="YES" width="70%"></div>
     </div>
 
     <audio
         style="display:none"
         ref="player"
         id="audio-player"
+        loop="true"
     >
-        <source src="../assets/time.mp3" type="audio/mpeg" />
+        <source src="http://www.emds.co.kr/media/bgm.mp3" type="audio/mpeg" />
     </audio>
-
-    
 
     <base-alert-message :message="alertMessage" v-on:btnClose="alertMessage = ''"/>
     <base-loading-bar v-if="loadingbar" v-on:loadingBarClose="loadingbar=false" />
@@ -119,11 +118,17 @@ export default {
     }
   },
   mounted() {
+    var audio = document.getElementById("audio-player");
+    audio.pause();
+
     this.url = this.$store.state.url
     this.point = this.$store.state.point
     this.cate = this.$store.state.cate
 
     this.common_back_image = this.url+'file/cate/'+this.$store.state.cate.common_back_image
+    document.querySelector('body').style.backgroundImage = "url("+this.common_back_image+")"
+    document.querySelector('body').style.backgroundSize = "100% 100%"
+    //document.getElementsByTagName('body').style.backgroundImage = "url("+this.common_back_image+")"
     
     //this.viewGift = true;
     //this.viewClose = true;
@@ -140,19 +145,16 @@ export default {
       this.question = this.$store.state.arrQuestion[this.nowNum++]
       
       setTimeout(() => {
-        this.viewQuestion = true     
-        var audio = document.getElementById("audio-player");
-        audio.play();
-        //audio.pause();
+        this.viewQuestion = true    
       }, 1000)
     },
     fnQuizResult(obj) {
+      console.log(obj)
       this.$store.state.reply.push(obj)
 
       this.viewQuestion= false
 
       if(obj.correct_yn) this.$store.state.answer.score += 20
-
 
       if(obj.correct_yn) setTimeout(() => {this.viewQuestionRight = true}, 1000)
       else setTimeout(() => {this.viewQuestionWrong = true}, 1000)
@@ -191,17 +193,18 @@ export default {
 <style lang="scss" scoped>
 .common {
   height: 100%;
-  background-size: 100% 100%;
   .wrap {
+    position: relative;
     padding: 0;
     text-align: center;
+    min-height: 560px;
     
     .box {
       display: inline-block;
     }
-  }
 
-  .yuyu {text-align: left; padding-left: 2rem;}
+    .yuyu {position: absolute; bottom: 0; text-align: left; padding-left: 2rem;}
+  }
 }
 
 .slide-fade-enter-active {

@@ -1,7 +1,7 @@
 <template>
   <div class="gift">
     <div class="content">
-      <img :src="image" width="90%" alt="이미지">
+      <img :src="image" width="80%" alt="이미지">
     </div>
     <div class="relative mt text-center">
       <ItemGift class="item"
@@ -84,9 +84,6 @@ export default {
 <style lang="scss" scoped>
 .gift {
   div.content {
-    img {
-        width: 100%;
-    }
   }
 
   .button-wrap {

@@ -1,13 +1,11 @@
 <template>
   <div class="opening">
      <div class="content">
-        <img :src="image" alt="오프닝이미지" id="opening_image">
+        <img :src="image" width="80%" alt="오프닝이미지" id="opening_image">
       </div>
       <div class="text-right">
-        <img class="click" :src="button_image" v-on:click="$emit('information')" alt="Yu Quiz?">
+        <img class="click" :src="button_image" width="15%" v-on:click="$emit('information')" alt="Yu Quiz?">
       </div>
-
-
   </div>
 </template>
 
@@ -34,18 +32,11 @@ export default {
 <style lang="scss" scoped>
 .opening {
     div.content {
-        img {
-            width: 90%;
-        }
     }
 }
 
 .text-right {
     padding: 10px 55px;
     text-align: right;
-
-    img {
-      width: 20%
-    }
 }
 </style>

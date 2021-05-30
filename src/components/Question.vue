@@ -1,11 +1,12 @@
 <template>
   <div class="questionObject">
     <div class="content">
-      <img :src="question_image" width="90%" alt="문제이미지">
+      <img :src="question_image" width="80%" alt="문제이미지">
     </div>
     <div class="relative mt text-center" v-if="question_type=='object'">
       <Item class="item"
             ref="item"
+            v-on:select="fnSelect"
             v-for="(item, index) in arrItem" 
             v-bind:index="index"
             v-bind:item="item.item"
@@ -15,6 +16,7 @@
     <div class="relative mt text-center" v-if="question_type=='ox'">
       <ItemOx class="item"
             ref="item"
+            v-on:select="fnSelect"
             v-for="(item, index) in arrItem" 
             v-bind:index="index"
             v-bind:item="item.item"
@@ -22,7 +24,7 @@
             v-bind:key="item.item_idx"/>
     </div>
     <div class="relative mt">
-      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="15%" alt="카운트">
+      <img class="ab-right click" :src="count_image" v-on:click="fnNext" width="10%" alt="카운트">
     </div>
   </div>
 </template>
@@ -47,6 +49,7 @@ export default {
       count: 5,
       count_image: '',
       question_type: '',
+      reply_type: '',
       goNext: false
     }
   },
@@ -56,6 +59,7 @@ export default {
     this.arrItem = this.question.item
 
     this.question_type = this.question.question_type
+    this.reply_type = this.question.reply_type
 
     this.fnCount()
   },
@@ -90,7 +94,14 @@ export default {
 
       this.count_image = require('../assets/count_'+(this.count--)+'.png')
       
-      setTimeout(this.fnCount, 1500)
+      //setTimeout(this.fnCount, 1500)
+    },
+    fnSelect(obj) {
+      if(this.reply_type == 'one') {
+        for(let i=0; i<this.$refs.item.length; i++) {
+          if(obj.index != i) this.$refs.item[i].fnDeSelected()
+        }
+      }
     }
   }
 }
@@ -98,9 +109,6 @@ export default {
 <style lang="scss" scoped>
 .questionObject {
   div.content {
-    img {
-        width: 100%;
-    }
   }
 
   .button-wrap {

@@ -1,6 +1,6 @@
 <template>
   <div class="item" v-on:click="fnReverse">
-      <img :src="num_image"> <span v-bind:style="{ color: now_color}">{{item}}</span>
+      <img :src="num_image" width="3%"> <span v-bind:style="{ color: now_color}">{{item}}</span>
   </div>
 </template>
 
@@ -43,8 +43,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .item {
-  line-height: 2.2rem;
-  font-size: 2.2rem;
+  line-height: 2rem;
+  font-size: 2rem;
    
   * {vertical-align: middle;}
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="point">
     <div class="content">
-      <img :src="image" width="90%" alt="이미지">
+      <img :src="image" width="80%" alt="이미지">
     </div>
     <div class="relative mt">
-      <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" width="18%" alt="NEXT">
+      <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" width="15%" alt="NEXT">
     </div>
   </div>
 </template>
@@ -35,9 +35,6 @@ export default {
 <style lang="scss" scoped>
 .point {
   div.content {
-    img {
-        width: 100%;
-    }
   }
 
   .button-wrap {

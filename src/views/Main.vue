@@ -30,6 +30,10 @@ export default {
       }
   },
   mounted() {
+    document.onselectstart = function() { return false; }  //드래그 막기
+    document.ondragstart = function() { return false; }    //선택 막기
+    document.ondblclick = function() { return false; }     //더블클릭 막기
+    
     this.url = this.$store.state.url
 
     if(this.$route.query.idx == undefined) return

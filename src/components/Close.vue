@@ -1,7 +1,7 @@
 <template>
   <div class="close">
     <div class="content">
-      <img :src="image" width="90%" alt="이미지">
+      <img :src="image" width="80%" alt="이미지">
     </div>
   </div>
 </template>
@@ -31,9 +31,6 @@ export default {
 <style lang="scss" scoped>
 .close {
   div.content {
-    img {
-        width: 100%;
-    }
   }
 }
 </style>
