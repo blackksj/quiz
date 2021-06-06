@@ -18,6 +18,8 @@ export default new Vuex.Store({
       department: '',
       hpno: '',
       charge_name: '',
+      pharm_name: '',
+      addr_gu: '',
       present: '',
       score: 0,
       reply: []
@@ -58,6 +60,7 @@ export default new Vuex.Store({
             .then(response => {
                 if(response.question) {
                   context.state.arrQuestion = response.question
+
                     return response.question
                 } else {
                     return response

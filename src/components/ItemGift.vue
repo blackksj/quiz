@@ -43,8 +43,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .item {
-  line-height: 2rem;
-  font-size: 2rem;
+  line-height: 1.2rem;
+  font-size: 1.2rem;
    
   * {vertical-align: middle;}
 }

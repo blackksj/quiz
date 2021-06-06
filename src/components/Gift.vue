@@ -26,7 +26,7 @@
             :item="item[3]"/>            
     </div>
     <div class="relative mt">
-      <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" width="15%" alt="NEXT">
+      <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" width="10%" alt="NEXT">
     </div>
   </div>
 </template>

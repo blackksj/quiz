@@ -94,7 +94,7 @@ export default {
 
       this.count_image = require('../assets/count_'+(this.count--)+'.png')
       
-      //setTimeout(this.fnCount, 1500)
+      setTimeout(this.fnCount, 1500)
     },
     fnSelect(obj) {
       if(this.reply_type == 'one') {

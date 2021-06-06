@@ -1,19 +1,19 @@
 <template>
   <div class="information">
     <div class="content">
-      <div class="rect"><img src="http://www.emds.co.kr/img/info-top.png"/></div>
-        <div class="content_background">
+      <div class="rect"><img :src="common_top_image"/></div>
+        <div class="content_background" v-bind:style="{backgroundImage:'url('+common_cen_image+')'}">
             <ul>
               <li><span>성명 :</span> <input type="text" name="name" v-model="name" autocomplete="off" placeholder="성명을 입력하세요"></li>
               <li><span>병원명 :</span> <input type="text" name="hospital_name" v-model="hospital_name" autocomplete="off" placeholder="병원명을 입력하세요"></li>
               <li><span>진료과 :</span> <input type="text" name="department" v-model="department" autocomplete="off" placeholder="진료과를 입력하세요"></li>
               <li><span>휴대폰번호 :</span> <input type="text" name="hpno" v-model="hpno" autocomplete="off" placeholder="휴대폰번호를 입력하세요"></li>
               <li><span>담당자 :</span> <input type="text" name="charge_name" v-model="charge_name" autocomplete="off" placeholder="담당자를 입력하세요"></li>
+              <li v-if="cate.pharm_view_yn == 'Y'"><span>약국명 :</span> <input type="text" name="pharm_name" v-model="pharm_name" autocomplete="off" placeholder="약국명을 입력하세요"></li>
+              <li v-if="cate.addr_gu_view_yn == 'Y'"><span>지역(구) :</span> <input type="text" name="addr_gu" v-model="addr_gu" autocomplete="off" placeholder="지역(구)를 입력하세요"></li>
               <li class="li-agreement">
                 개인정보 수집 및 이용동의
-                <div class="agreement">
-                  입력하신 선생님의 정보는 유유제약의 마케팅 목적과 메디컴에서의 모바일 쿠폰 발송<br> 목적으로 활용됩니다. 
-                  위 목적 이외 선생님의 개인정보를 제 3자에게 제공하지 않습니다.
+                <div class="agreement" v-html="fnRtnDecode(cate.information_content)">
                 </div>
                 <div class="agreement-check">
                   <label for="agree"><input type="checkbox" id="agree" v-model="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.</label>
@@ -22,10 +22,10 @@
             </ul>
         </div>
         <div class="rect">
-          <img src="http://www.emds.co.kr/img/info-bottom.png"/>
+          <img :src="common_bottom_image"/>
         </div>
     </div>
-    <div class="relative mt">
+    <div class="relative">
       <div class="ab-top"><img src="http://www.emds.co.kr/img/yuquiz.png" alt="Yu Quiz?" width="15%"></div>
       <img class="ab-right click" src="http://www.emds.co.kr/img/yes.png" v-on:click="fnYes" width="10%" alt="YES">
     </div>
@@ -39,15 +39,22 @@ export default {
   },
   data() {
     return {
-      
+      url: '',
       name: '',
       hospital_name: '',
       department: '',
       hpno: '',
       charge_name: '',
+      pharm_name: '',
+      addr_gu: '',
       present: '',
       score: '',
-      agree: false
+      agree: false,
+      
+      cate: {},
+      common_top_image: '',
+      common_cen_image: '',
+      common_bottom_image: '',
       /*
       name: '테스트',
       hospital_name: '병원명',
@@ -61,6 +68,12 @@ export default {
     }
   },
   mounted() {
+    this.url = this.$store.state.url
+    this.cate = this.$store.state.cate
+
+    this.common_top_image = this.url+'file/cate/'+this.cate.common_top_image
+    this.common_cen_image = this.url+'file/cate/'+this.cate.common_cen_image
+    this.common_bottom_image = this.url+'file/cate/'+this.cate.common_bottom_image
   },
   methods: {
     fnYes() {
@@ -84,6 +97,14 @@ export default {
         this.$emit('message', '담당자를 입력하세요')
         return
       }
+      if(this.pharm_name == '' && this.cate.pharm_view_yn == 'Y') {
+        this.$emit('message', '약국명을 입력하세요')
+        return
+      }
+      if(this.addr_gu == '' && this.cate.addr_gu_view_yn == 'Y') {
+        this.$emit('message', '지역(구)를 입력하세요')
+        return
+      }
       if(!this.agree) {
         this.$emit('message', '개인정보 수집 및 이용에 동의하세요')
         return
@@ -95,8 +116,13 @@ export default {
       this.$store.state.answer.department = this.department
       this.$store.state.answer.hpno = this.hpno
       this.$store.state.answer.charge_name = this.charge_name
+      this.$store.state.answer.pharm_name = this.pharm_name
+      this.$store.state.answer.addr_gu = this.addr_gu
 
       this.$emit('quizStart')
+    },
+    fnRtnDecode(val) {
+      return decodeURI(val).replace("\n", "<br />").replace(/\+/gi, " ")
     }
   }
 }
@@ -111,14 +137,14 @@ export default {
   .content_background {
     margin-top: -5px;
     padding: 5px 100px;
-    background-image:url('http://www.emds.co.kr/img/info-cen.png');
     background-repeat: repeat-y;
     background-size: 100%;
     ul {
       margin: 0; padding: 0;
       li {
-        line-height: 2.5rem;
+        line-height: 2rem;
         span {
+          font-size: 0.9rem;
           width: 8rem;
           display: inline-block;
           vertical-align: middle;
@@ -132,7 +158,7 @@ export default {
           background-color: #d6dce5;
           color: #2b292c;
           padding-left: 1rem;
-          font-size: 0.9rem;
+          font-size: 0.8rem;
           font-weight: bold;
           font-family: 'Nanum Gothic', sans-serif;
         }
@@ -143,16 +169,17 @@ export default {
           background-color: #e7e7e8;
           color: #383739;
           text-align: center;
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           line-height: 1rem;
         }
         .agreement-check {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           color: #5b595b;
           input {vertical-align: middle; line-height: 1rem;}
         }
 
         &.li-agreement {
+          font-size: 0.78rem;
           line-height: 2rem;
         }
       }

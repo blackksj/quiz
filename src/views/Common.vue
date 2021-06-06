@@ -53,7 +53,7 @@
               :cate="cate"
               v-if="viewClose" />
        </transition>
-       <div class="yuyu"><img src="http://www.emds.co.kr/img/yuyu.png" alt="YES" width="70%"></div>
+       <div class="yuyu"><img :src="left_down_image" alt="YES" width="70%"></div>
     </div>
 
     <audio
@@ -112,24 +112,31 @@ export default {
       question: {},
       nowNum: 0,
       common_back_image: '',
+      left_down_image: '',
 
       loadingbar: false,
       alertMessage: ''
     }
   },
   mounted() {
+    this.$store.state.answer.score = 0
+    this.point = this.$store.state.point
+
     var audio = document.getElementById("audio-player");
-    audio.pause();
+    audio.play();
 
     this.url = this.$store.state.url
     this.point = this.$store.state.point
     this.cate = this.$store.state.cate
 
-    this.common_back_image = this.url+'file/cate/'+this.$store.state.cate.common_back_image
+    this.common_back_image = this.url+'file/cate/'+this.cate.common_back_image
+    this.left_down_image = this.url+'file/cate/'+this.cate.left_bottom_image
     document.querySelector('body').style.backgroundImage = "url("+this.common_back_image+")"
     document.querySelector('body').style.backgroundSize = "100% 100%"
     //document.getElementsByTagName('body').style.backgroundImage = "url("+this.common_back_image+")"
     
+    
+    //this.viewPoint = true;
     //this.viewGift = true;
     //this.viewClose = true;
     this.viewOpening = true;
@@ -149,13 +156,12 @@ export default {
       }, 1000)
     },
     fnQuizResult(obj) {
-      console.log(obj)
       this.$store.state.reply.push(obj)
 
       this.viewQuestion= false
 
-      if(obj.correct_yn) this.$store.state.answer.score += 20
-
+      if(obj.correct_yn) this.$store.state.answer.score += Number(this.point)
+      
       if(obj.correct_yn) setTimeout(() => {this.viewQuestionRight = true}, 1000)
       else setTimeout(() => {this.viewQuestionWrong = true}, 1000)
     },
@@ -197,13 +203,13 @@ export default {
     position: relative;
     padding: 0;
     text-align: center;
-    min-height: 560px;
+    min-height: 500px;
     
     .box {
       display: inline-block;
     }
 
-    .yuyu {position: absolute; bottom: 0; text-align: left; padding-left: 2rem;}
+    .yuyu {position: absolute; top: 500px; text-align: left; padding-left: 2rem;}
   }
 }
 
