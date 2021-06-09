@@ -36,9 +36,9 @@ export default {
     
     this.url = this.$store.state.url
 
-    if(this.$route.query.idx == undefined) return
+    if(this.$route.query.idx == undefined && this.$route.query.code == undefined) return
     
-    this.$store.commit('setIdx', this.$route.query.idx)
+    this.$store.commit('setInit', this.$route.query)
     this.$store.dispatch('getCate').then(response => {
         let obj = response
 
@@ -47,9 +47,11 @@ export default {
         this.main_button_image = this.url+'file/cate/'+obj.main_button_image
 
         this.main = true
-    }).catch(() => {});
-    this.$store.dispatch('getQuestion').then(response => {
-        this.$store.commit('setPoint', Math.round(100 / response.length).toString())
+      
+      this.$store.dispatch('getQuestion').then(response => {
+            this.$store.commit('setPoint', Math.round(100 / response.length).toString())
+        }).catch(() => {});
+      
     }).catch(() => {});
   },
   methods: {

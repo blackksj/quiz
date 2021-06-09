@@ -1,13 +1,13 @@
 <template>
   <div class="point">
     <div class="content">
-      <div class="rect"><img :src="common_top_image"/></div>
+      <div class="rect"><img :src="common_top_image" width="80%"/></div>
         <div class="content_background" v-bind:style="{backgroundImage:'url('+common_cen_image+')'}">
-            <img src="http://www.emds.co.kr/img/your_point.png" alt="">
-            {{point}}
+            <div style="padding: 2rem;"><img src="http://www.emds.co.kr/img/your_point.png" alt=""></div>
+            <div class="point">{{point}}</div>
         </div>
         <div class="rect">
-          <img :src="common_bottom_image"/>
+          <img :src="common_bottom_image" width="80%"/>
         </div>
     </div>
       
@@ -45,7 +45,12 @@ export default {
     this.common_bottom_image = this.url+'file/cate/'+this.cate.common_bottom_image
 
     //this.image = require('../assets/point-'+this.$store.state.answer.score+'.png')
-    this.point = this.$store.state.answer.score
+    let point = this.$store.state.answer.score
+    if(point == 33) point = 40
+    else if(point == 66) point = 70
+    else if(point == 99) point = 100
+    
+    this.$store.state.answer.score = this.point = point
   },
   methods: {
     fnNext() {
@@ -60,11 +65,13 @@ export default {
     .content_background {
       margin-top: -5px;
       background-repeat: repeat-y;
-      background-size: 100%;
-      font-size: 10rem;
-      padding: 4rem 1rem;
+      background-size: 80%;
+      background-position: center;
+      padding: 1rem 1rem;
       font-weight: bold;
       color: #666;
+      
+      .point {font-size: 10rem;}
     }
   }
 

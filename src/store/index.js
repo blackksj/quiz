@@ -8,6 +8,7 @@ export default new Vuex.Store({
     url: 'http://www.emds.co.kr/',
     rest_url: 'http://www.emds.co.kr/rest/',
     idx: 0,
+    code: '',
     cate: {},
     arrQuestion: [],
     point: 20,
@@ -28,8 +29,9 @@ export default new Vuex.Store({
     lastedSelectedItem: []
   },
   mutations: {
-    setIdx(state, idx)  {
-      state.idx = idx;
+    setInit(state, obj)  {
+      state.idx = obj.idx;
+      state.code = obj.code;
     },
     setPoint(state, point) {
       state.point = point
@@ -38,13 +40,16 @@ export default new Vuex.Store({
   actions: {
     getCate(context) {
       let REST_URL = context.state.rest_url;
-      REST_URL += '/cate_select.php?idx='+context.state.idx;
+
+      if(context.state.idx) REST_URL += '/cate_select.php?idx='+context.state.idx;
+      if(context.state.code) REST_URL += '/cate_select.php?code='+context.state.code;
 
       return fetch(REST_URL)
             .then(response => response.json())
             .then(response => {
                 if(response.data) {
                   context.state.cate = response.data
+                  context.state.idx = response.data.cate_idx
                     return response.data
                 } else {
                     return response.data
