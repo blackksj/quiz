@@ -123,7 +123,7 @@ export default {
     this.point = this.$store.state.point
 
     var audio = document.getElementById("audio-player");
-    audio.pause();
+    audio.play();
 
     this.url = this.$store.state.url
     this.point = this.$store.state.point

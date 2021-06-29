@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       image: '',
-      count: 5,
+      count: 15,
       count_image: '',
       goNext: false
     }

@@ -46,7 +46,7 @@ export default {
     return {
       question_image: '',
       arrItem: [],
-      count: 5,
+      count: 15,
       count_image: '',
       question_type: '',
       reply_type: '',

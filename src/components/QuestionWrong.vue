@@ -35,7 +35,7 @@ export default {
     return {
       image: '',
       arrItem: [],
-      count: 5,
+      count: 15,
       count_image: '',
       goNext: false
     }
