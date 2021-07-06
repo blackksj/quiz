@@ -4,26 +4,15 @@
       <img :src="image" width="80%" alt="이미지">
     </div>
     <div class="relative mt text-center">
+      
       <ItemGift class="item"
-            ref="itemGift0"
-            :index="0"
+            ref="item"
             v-on:select="fnSelect"
-            :item="item[0]"/>
-      <ItemGift class="item"
-            ref="itemGift1"
-            :index="1"
-            v-on:select="fnSelect"
-            :item="item[1]"/>
-      <ItemGift class="item"
-            ref="itemGift2"
-            :index="2"
-            v-on:select="fnSelect"
-            :item="item[2]"/>
-      <ItemGift class="item"
-            ref="itemGift3"
-            :index="3"
-            v-on:select="fnSelect"
-            :item="item[3]"/>            
+            v-for="(item, index) in arrItem" 
+            v-bind:index="index"
+            v-bind:item="item"
+            v-bind:key="item"/>
+           
     </div>
     <div class="relative mt">
       <img class="ab-right click" src="../assets/next.png" v-on:click="fnNext" width="10%" alt="NEXT">
@@ -45,14 +34,14 @@ export default {
   data() {
     return {
       image: '',
-      item: [],
+      arrItem: [],
       goNext: false
     }
   },
   mounted() {
     this.url = this.$store.state.url
     this.image = this.url+'file/cate/'+this.cate.gift_image
-    this.item = this.$store.state.cate.gift_text.split('|')
+    this.arrItem = this.$store.state.cate.gift_text.split('|')
   },
   methods: {
     fnNext() {
@@ -71,10 +60,9 @@ export default {
 
     },
     fnSelect(obj) {
-      if(obj.index != 0) {this.$refs.itemGift0.fnDeSelected()}
-      if(obj.index != 1) {this.$refs.itemGift1.fnDeSelected()}
-      if(obj.index != 2) {this.$refs.itemGift2.fnDeSelected()}
-      if(obj.index != 3) {this.$refs.itemGift3.fnDeSelected()}
+      for(let i=0; i<this.$refs.item.length; i++) {
+          if(obj.index != i) this.$refs.item[i].fnDeSelected()
+        }
 
       this.$store.state.answer.present = obj.item
     }
