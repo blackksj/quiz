@@ -50,7 +50,8 @@ export default {
 }
 
 .number {
-  display: inline-block; width: 1em; height: 1em;
+  display: inline-block; width: 1.5rem; height: 1.5rem; line-height: 1.5rem;
+  font-size: 1.5rem;
   background-color: #2b2e83; color: #fff;
   border-radius: 2em; padding: 0.3em;
 }

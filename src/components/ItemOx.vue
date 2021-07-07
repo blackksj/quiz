@@ -1,6 +1,6 @@
 <template>
   <div class="item" v-on:click="fnReverse">
-      <img :src="num_image" width="3%"> <span v-bind:style="{ color: now_color}">{{item}}</span>
+      <span class="number">{{num_image}}</span> <span v-bind:style="{ color: now_color}">{{item}}</span>
   </div>
 </template>
 
@@ -23,7 +23,8 @@ export default {
     }
   },
   mounted() {
-      this.num_image = require('../assets/'+(this.index+1)+'.png')
+      this.num_image = this.index+1
+
       if(this.correct_yn == 'right') {
         this.result = this.selected
       } else if(this.correct_yn == 'wrong') {
@@ -65,5 +66,12 @@ export default {
   font-size: 2rem;
    
   * {vertical-align: middle;}
+}
+
+.number {
+  display: inline-block; width: 1.5rem; height: 1.5rem; line-height: 1.5rem;
+  font-size: 1.5rem;
+  background-color: #2b2e83; color: #fff;
+  border-radius: 2em; padding: 0.3em;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="item" v-on:click="fnReverse">
-      <img :src="num_image" width="3%"> <span v-bind:style="{ color: now_color}">{{item}}</span>
+      <span class="number">{{num_image}}</span> <span class="num-item" v-bind:style="{ color: now_color, fontSize: size, lineHeight: line_height}" v-html="tagItem"></span>
   </div>
 </template>
 
@@ -14,21 +14,32 @@ export default {
   },
   data() {
     return {
+      tagItem: '',
         num_image: '',
         default_color: '#000',
         selected_color: '#fff',
         now_color: '#000',
+        size: '2rem',
+        line_height: '2rem',
         selected: false,
-        result: false
+        result: false,
     }
   },
   mounted() {
-      this.num_image = require('../assets/'+(this.index+1)+'.png')
-      if(this.correct_yn == 'right') {
-        this.result = this.selected
-      } else if(this.correct_yn == 'wrong') {
-        this.result = !this.selected
-      }
+    this.num_image = this.index+1
+
+    this.tagItem = this.item
+    if(this.item.indexOf('|') !== -1) {
+      this.tagItem = this.item.replace('|', '<br>')
+      this.size = '1.2rem'
+      this.line_height = '1.2rem'
+    }
+
+    if(this.correct_yn == 'right') {
+      this.result = this.selected
+    } else if(this.correct_yn == 'wrong') {
+      this.result = !this.selected
+    }
   },
   methods: {
     fnReverse() {
@@ -62,8 +73,18 @@ export default {
 <style lang="scss" scoped>
 .item {
   line-height: 2rem;
-  font-size: 2rem;
    
   * {vertical-align: middle;}
+}
+
+.num-item {
+  display: inline-block;
+}
+
+.number {
+  display: inline-block; width: 1.5rem; height: 1.5rem; line-height: 1.5rem;
+  font-size: 1.5rem;
+  background-color: #2b2e83; color: #fff;
+  border-radius: 2rem; padding: 0.3rem;
 }
 </style>
